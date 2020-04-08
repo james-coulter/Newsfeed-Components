@@ -99,6 +99,7 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
+
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
@@ -112,3 +113,62 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articles = document.querySelector('.articles')
+
+function makePanel ({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+ 
+  //Instantiate all elements needed
+  const article = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const articleContent1 = document.createElement('p')
+  const articleContent2 = document.createElement('p')
+  const articleContent3 = document.createElement('p')
+  const articleButtonOpen = document.createElement('span')
+  const articleButtonClosed = document.createElement('span')
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(articleContent1)
+  article.appendChild(articleContent2)
+  article.appendChild(articleContent3)
+  article.appendChild(articleButtonOpen)
+  article.appendChild(articleButtonClosed)
+
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  articleButtonOpen.classList.add('expandButton')
+  articleButtonClosed.classList.add('expandButton', 'hide-btn')
+
+  articleTitle.textContent = title
+  articleDate.textContent = date
+  articleContent1.textContent = firstParagraph
+  articleContent2.textContent = secondParagraph
+  articleContent3.textContent = thirdParagraph
+
+  const open = '\u25bc'
+  articleButtonOpen.textContent = open
+
+  const close = '\u25b2'
+  articleButtonClosed.textContent = close
+
+
+  articleButtonOpen.addEventListener('click', event => {
+    article.classList.toggle('article-open')
+    articleButtonOpen.classList.toggle('hide-btn')
+    articleButtonClosed.classLies.toggle('hide-btn')
+  })
+
+  return article
+}
+
+const articleElements = data.map(data => {
+  return makePanel(data)
+})
+
+articleElements.forEach(data => {
+  articles.appendChild(data)
+})
+
+
