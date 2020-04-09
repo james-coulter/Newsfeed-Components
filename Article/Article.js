@@ -190,6 +190,7 @@ function makePanel ({title, date, firstParagraph, secondParagraph, thirdParagrap
   const articleContent3 = document.createElement('p')
   const articleButtonOpen = document.createElement('span')
   const articleButtonClosed = document.createElement('span')
+  const articleExit = document.createElement('button')
 
   article.appendChild(articleTitle)
   article.appendChild(articleDate)
@@ -198,17 +199,20 @@ function makePanel ({title, date, firstParagraph, secondParagraph, thirdParagrap
   article.appendChild(articleContent3)
   article.appendChild(articleButtonOpen)
   article.appendChild(articleButtonClosed)
+  article.appendChild(articleExit)
 
   article.classList.add('article')
   articleDate.classList.add('date')
   articleButtonOpen.classList.add('expandButton')
   articleButtonClosed.classList.add('expandButton', 'hide-btn')
+  articleExit.classList.add('close')
 
   articleTitle.textContent = title
   articleDate.textContent = date
   articleContent1.textContent = firstParagraph
   articleContent2.textContent = secondParagraph
   articleContent3.textContent = thirdParagraph
+  articleExit.textContent = 'Mark as Read'
 
   const open = '\u25bc'
   articleButtonOpen.textContent = open
@@ -228,6 +232,11 @@ function makePanel ({title, date, firstParagraph, secondParagraph, thirdParagrap
     articleButtonOpen.classList.toggle('hide-btn')
     articleButtonClosed.classLies.toggle('hide-btn')
   })
+
+  articleExit.addEventListener('click', () => {
+    article.style.display = 'none';
+  })
+  
 
   return article
 }
